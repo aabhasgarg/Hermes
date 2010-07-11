@@ -7,8 +7,8 @@ public class Main {
 	private static ChatConnection conn;
 
 	public static void main(String[] args) {
-		String username = "braun.markus89@googlemail.com";
-		String password = "";
+		String username = "YoFrankie";
+		String password = "testit";
 		try {
 			conn = new ChatConnection(username, password);
 			System.out.println("conn succesful");
@@ -19,7 +19,7 @@ public class Main {
 
 		if (conn != null) {
 			MultiUserChat muc = new MultiUserChat(conn,
-					"myroom@talk.google.com");
+					"myroom@conference.jabber.org");
 
 			try {
 				muc.create(username);

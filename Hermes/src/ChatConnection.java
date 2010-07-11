@@ -7,7 +7,7 @@ public class ChatConnection extends XMPPConnection {
 
 	public ChatConnection(String username, String password)
 			throws XMPPException {
-		super(new ConnectionConfiguration("talk.google.com", 5222, "gmail.com"));
+		super(new ConnectionConfiguration("jabber.org", 5222, "jabber.org"));
 
 		connect();
 
