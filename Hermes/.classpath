@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="/home/markus/Programmieren/EclipseWorkspace/Hermes/emite-0.5.0.jar"/>
 	<classpathentry kind="lib" path="/home/markus/Programmieren/EclipseWorkspace/Hermes/suco-0.7.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Dome/Desktop/Hermes/Hermes/smack_3_1_0/smack.jar"/>
-	<classpathentry kind="lib" path="/Users/Dome/Desktop/Hermes/Hermes/smack_3_1_0/smackx.jar"/>
+	<classpathentry kind="lib" path="/home/markus/Programmieren/EclipseWorkspace/Hermes/smack_3_1_0/smack.jar"/>
+	<classpathentry kind="lib" path="/home/markus/Programmieren/EclipseWorkspace/Hermes/smack_3_1_0/smackx.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
