@@ -3,6 +3,8 @@
 
 #administration
 *.svn
+.classpath
+
 
 #osx noise
 .DS_Store
