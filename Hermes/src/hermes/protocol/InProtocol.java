@@ -2,9 +2,9 @@ package hermes.protocol;
 
 public class InProtocol {
 	
-	private InActionsInterface actionsInterface;
+	private ActionsInterface actionsInterface;
 	
-	public InProtocol(InActionsInterface actions) {
+	public InProtocol(ActionsInterface actions) {
 		this.actionsInterface = actions;
 	}
 	

@@ -3,7 +3,7 @@ package hermes.protocol;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
-public class OutProtocol implements OutActionsInterface {
+public class OutProtocol implements ActionsInterface {
 	private MultiUserChat muc;
 	
 	public OutProtocol(MultiUserChat muc) {
