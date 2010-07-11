@@ -1,4 +1,6 @@
+import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.Form;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
@@ -18,17 +20,30 @@ public class Main {
 		}
 
 		if (conn != null) {
-			MultiUserChat muc = new MultiUserChat(conn,
-					"myroom@conference.jabber.org");
+			final MultiUserChat muc = new MultiUserChat(conn,
+					"myblub@conference.jabber.org");
 
 			try {
 				muc.create(username);
 				muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
+				muc.addMessageListener(new PacketListener() {
+					
+					@Override
+					public void processPacket(Packet pack) {
+						System.out.println("received pack");
+						System.out.println(muc.nextMessage().getBody());
+					}
+				});
+				muc.sendMessage("hello multiuser chat");
+				System.out.println("message sent");
+				
 			} catch (XMPPException e) {
 				e.printStackTrace();
 			}
 
 		}
+		while(true) {
 
+		}
 	}
 }
