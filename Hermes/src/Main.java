@@ -24,7 +24,6 @@ public class Main {
 		if (conn != null) {
 			final MultiUserChat muc = new MultiUserChat(conn,
 					"myblub@conference.jabber.org");
-
 			try {
 				muc.create(username);
 				muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
