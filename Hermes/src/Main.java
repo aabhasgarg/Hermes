@@ -1,4 +1,5 @@
 import hermes.view.View;
+import hermes.xmpp.ChatConnection;
 
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.XMPPException;
@@ -25,7 +26,7 @@ public class Main {
 			final MultiUserChat muc = new MultiUserChat(conn,
 					"myblub@conference.jabber.org");
 			try {
-				muc.create(username);
+				muc.create("random");
 				muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
 				muc.addMessageListener(new PacketListener() {
 					
