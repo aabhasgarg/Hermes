@@ -4,6 +4,7 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
 public class OutProtocol implements ActionsInterface {
+
 	private MultiUserChat muc;
 	private String username;
 

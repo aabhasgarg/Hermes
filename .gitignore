@@ -1,9 +1,13 @@
 #binaries
 *.class
+*class
 
 #administration
 *.svn
+/Hermes/.classpath
 .classpath
+.settings
+.project
 
 
 #osx noise
