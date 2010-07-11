@@ -1,3 +1,5 @@
+import hermes.view.View;
+
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Packet;
