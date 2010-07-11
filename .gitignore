@@ -3,7 +3,7 @@
 
 #administration
 *.svn
-.classpath
+Hermes/.classpath
 
 
 #osx noise
