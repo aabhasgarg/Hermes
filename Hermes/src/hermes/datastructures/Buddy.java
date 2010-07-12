@@ -3,7 +3,7 @@ package hermes.datastructures;
 public class Buddy {
  
     private String name;
-    private int buddyID;
+    private String JID;
     
     @Override
     public String toString() {
