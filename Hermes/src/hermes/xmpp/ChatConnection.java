@@ -19,4 +19,5 @@ public class ChatConnection extends XMPPConnection {
 		// System.out.println(isAuthenticated());
 
 	}
+	
 }

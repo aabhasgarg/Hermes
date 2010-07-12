@@ -13,7 +13,7 @@ import javax.swing.table.*;
  * @author Dome
  * 
  */
-public class BuddyListView extends JFrame {
+public class BuddyListView extends JPanel {
 
     private final View parent;
     private final JTable buddyTable;
@@ -50,9 +50,12 @@ public class BuddyListView extends JFrame {
 
 	this.buddyTable = new JTable(dataModel);
 	this.buddyTable.setFillsViewportHeight(true);
-
 	JScrollPane scrollPane = new JScrollPane(this.buddyTable);
 	this.add(scrollPane);
+
+	JPanel buttons = new JPanel();
+	buttons.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+	
 
     }
 
@@ -63,8 +66,9 @@ public class BuddyListView extends JFrame {
      * @param bl
      *            the new Buddylist
      */
-    public void newBuddyList(List<Buddy> bl) {
+    public void setBuddyList(List<Buddy> bl) {
 	this.onlineBuddies = bl;
+	this.repaint();
 
     }
 }
