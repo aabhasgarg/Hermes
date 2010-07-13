@@ -30,4 +30,7 @@ public class View extends JFrame {
 	this.jabberView.setConnection(conn);
     }
 
+    public void addChatWindow() {
+
+    }
 }

@@ -1,7 +1,9 @@
 package hermes.view.jabber;
 
+import java.awt.event.MouseEvent;
 import java.util.Collection;
 
+import hermes.Controller;
 import hermes.view.View;
 import hermes.xmpp.ChatConnection;
 
@@ -73,6 +75,7 @@ public class JabberView extends JPanel {
 		    buddyList[i] = (RosterEntry) tmp[i];
 
 	    }
+	    Controller.CURRENT_INSTANCE.buddyList = buddyList;
 	    this.listView.setBuddyList(buddyList);
 	}
     }
@@ -110,4 +113,11 @@ public class JabberView extends JPanel {
 
     }
 
+    public void startChatWith(int index) {
+	Controller.CURRENT_INSTANCE.startChatWith(index);
+    }
+
+    public void showContextMenu(MouseEvent e, int person) {
+
+    }
 }

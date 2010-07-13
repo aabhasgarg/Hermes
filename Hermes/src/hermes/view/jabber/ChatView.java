@@ -1,8 +1,8 @@
 package hermes.view.jabber;
 
-import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
-public class ChatView extends JPanel {
+public class ChatView extends JTabbedPane {
 
     private final JabberView parent;
 

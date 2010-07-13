@@ -5,6 +5,8 @@ import hermes.xmpp.ChatConnection;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
@@ -60,11 +64,54 @@ public class BuddyListView extends JPanel {
 	};
 
 	this.buddyTable = new JTable(dataModel);
-	this.buddyTable.setDefaultRenderer(Object.class,new ContactTableRenderer(parent));
+	this.buddyTable.setDefaultRenderer(Object.class,
+		new ContactTableRenderer(parent));
 	this.buddyTable.setFillsViewportHeight(true);
 	JScrollPane scrollPane = new JScrollPane(this.buddyTable);
 	this.add(scrollPane);
 
+	this.buddyTable.addMouseListener(new MouseListener() {
+
+	    @Override
+	    public void mouseClicked(MouseEvent e) {
+		if (e.getComponent().isEnabled()
+			&& e.getButton() == MouseEvent.BUTTON1
+			&& e.getClickCount() == 2) {
+
+		    int row = buddyTable.rowAtPoint(e.getPoint());
+		    BuddyListView.this.parent.startChatWith(row);
+
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
+		    int row = buddyTable.rowAtPoint(e.getPoint());
+		    BuddyListView.this.parent.showContextMenu(e, row);
+		}
+	    }
+
+	    @Override
+	    public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	    }
+
+	    @Override
+	    public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	    }
+
+	    @Override
+	    public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	    }
+
+	    @Override
+	    public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	    }
+
+	});
 	JPanel buttons = new JPanel();
 	buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 	JButton addContact = new JButton("+");
