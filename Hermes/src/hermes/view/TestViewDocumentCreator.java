@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import org.jivesoftware.smack.PacketListener;
+import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
@@ -42,6 +43,9 @@ public class TestViewDocumentCreator extends JFrame implements ActionsInterface 
 		initMultiuserChat();
 		initProtocols();
 		addMultiuserListener();
+		for(RosterEntry ent:conn.getRoster().getEntries()){
+			System.out.println(ent.getName());
+		}
 	}
 
 	private void initProtocols() {
