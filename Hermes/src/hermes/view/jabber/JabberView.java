@@ -71,6 +71,7 @@ public class JabberView extends JPanel {
 	    for (int i = 0; i < tmp.length; i++) {
 		if (tmp[i] instanceof RosterEntry)
 		    buddyList[i] = (RosterEntry) tmp[i];
+
 	    }
 	    this.listView.setBuddyList(buddyList);
 	}
@@ -90,15 +91,22 @@ public class JabberView extends JPanel {
 	    String JID, name = null;
 	    JID = JOptionPane.showInputDialog(this, "Bitte JID eingeben",
 		    "jabberID");
-
+	    if (JID == null)
+		return;
 	    try {
 		this.conn.getRoster().createEntry(JID, name, null);
+		reloadBuddyList();
 	    } catch (XMPPException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	    // dritter param waere die gruppe
 	}
+
+    }
+
+    public Presence getJabberStatus(int index) {
+	return conn.getRoster().getPresence(buddyList[index].getUser());
 
     }
 

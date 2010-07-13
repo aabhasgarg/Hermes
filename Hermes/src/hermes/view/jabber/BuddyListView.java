@@ -60,6 +60,7 @@ public class BuddyListView extends JPanel {
 	};
 
 	this.buddyTable = new JTable(dataModel);
+	this.buddyTable.setDefaultRenderer(Object.class,new ContactTableRenderer(parent));
 	this.buddyTable.setFillsViewportHeight(true);
 	JScrollPane scrollPane = new JScrollPane(this.buddyTable);
 	this.add(scrollPane);
@@ -85,14 +86,15 @@ public class BuddyListView extends JPanel {
 
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		int res = JOptionPane.showConfirmDialog(BuddyListView.this,
-			"Diese Aktion kann nicht widerrufen werden",
-			"Freund loeschen", JOptionPane.YES_NO_OPTION);
-		if (res == JOptionPane.YES_OPTION) {
-		    BuddyListView.this.parent.removeBuddy(buddyTable
-			    .getSelectedRow());
-		    int selected = buddyTable.getSelectedRow();
+		if (buddyTable.getSelectedRow() != -1) {
+		    int res = JOptionPane.showConfirmDialog(BuddyListView.this,
+			    "Diese Aktion kann nicht widerrufen werden",
+			    "Freund loeschen", JOptionPane.YES_NO_OPTION);
+		    if (res == JOptionPane.YES_OPTION) {
+			BuddyListView.this.parent.removeBuddy(buddyTable
+				.getSelectedRow());
 
+		    }
 		}
 
 	    }
