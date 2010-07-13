@@ -7,6 +7,8 @@ import hermes.xmpp.ChatConnection;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -16,7 +18,9 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.Form;
+import org.jivesoftware.smackx.muc.HostedRoom;
 import org.jivesoftware.smackx.muc.MultiUserChat;
+import org.jivesoftware.smackx.muc.RoomInfo;
 
 public class TestViewDocumentCreator extends JFrame implements ActionsInterface {
 
@@ -27,11 +31,11 @@ public class TestViewDocumentCreator extends JFrame implements ActionsInterface 
 	private String password = "testit";
 	private MultiUserChat muc;
 	private JTextArea text;
-	
+
 	public TestViewDocumentCreator() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		initComponents();
-		setSize(200, 200);
+		setSize(800, 400);
 		initConnection();
 		if (conn == null)
 			System.exit(0);
@@ -44,7 +48,7 @@ public class TestViewDocumentCreator extends JFrame implements ActionsInterface 
 		outProtocol = new OutProtocol(muc, username);
 		inProtocol = new InProtocol(this, username);
 	}
-	
+
 	private void addMultiuserListener() {
 		muc.addMessageListener(new PacketListener() {
 
@@ -55,18 +59,33 @@ public class TestViewDocumentCreator extends JFrame implements ActionsInterface 
 			}
 		});
 	}
-	
-	private void initMultiuserChat() {
-		muc = new MultiUserChat(conn,
-				"blubbernewroom@conference.jabber.org");
-		try {
-			muc.create(username);
-			muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
-//			muc.join(username);
 
-		} catch (XMPPException e) {
-			e.printStackTrace();
+	private void initMultiuserChat() {
+		String roomName = "bbblablubbernewroom@conference.jabber.org";
+		muc = new MultiUserChat(conn, roomName);
+
+		System.out.println("check existing rooms");
+		Map<String, Boolean> entries = createBlockedRoomsMap();
+
+		if (entries.containsKey("bbblablubbernewroom@conference.jabber.org")) {
+			System.out.println("room already exists");
+			try {
+				muc.join(username);
+			} catch (XMPPException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("room doesn't exist");
+			try {
+				muc.create(username);
+				muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
+			} catch (XMPPException e) {
+				e.printStackTrace();
+			}
 		}
+		System.out.println("existing rooms checked");
+
+		
 	}
 
 	private void initConnection() {
@@ -86,11 +105,11 @@ public class TestViewDocumentCreator extends JFrame implements ActionsInterface 
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					System.out.println("enter pressed");
-				} else {
-					outProtocol.addSign(0, 0, String.valueOf(e.getKeyChar()));
-				}
+				int selStart = text.getSelectionStart();
+				String typed = String.valueOf(e.getKeyChar());
+				if (typed.equals("\n"))
+					selStart--;
+				outProtocol.addSign(0, selStart, typed);
 			}
 
 			@Override
@@ -104,6 +123,42 @@ public class TestViewDocumentCreator extends JFrame implements ActionsInterface 
 		add(text);
 	}
 
+	private Map<String, Boolean> createBlockedRoomsMap() {
+		// Assume we have a valid connection
+		// List all the services
+		Map<String, Boolean> entries = new HashMap<String, Boolean>();
+		try {
+			for (String service : MultiUserChat.getServiceNames(conn)) {
+				// System.out.println("Service name: " + service);
+				// Get the list of rooms under this service
+				for (HostedRoom room : MultiUserChat.getHostedRooms(conn,
+						service)) {
+					entries.put(room.getJid(), true);
+					// System.out.println("\tName: " + room.getName());
+					// System.out.println("\tRoom JID: " + room.getJid());
+					// if (room.getJid().contains("bbblablubbernewroom")) {
+					// System.out.println("room exists");
+					// break;
+					// }
+
+					// Get the detail information on the room
+					/*
+					 * RoomInfo info = MultiUserChat.getRoomInfo(conn,
+					 * room.getJid()); if(info!=null){
+					 * System.out.println("\tDescription: " +
+					 * info.getDescription()); System.out.println("\tOccupant: "
+					 * + info.getOccupantsCount());
+					 * System.out.println("\tPassword: " +
+					 * info.isPasswordProtected()); }
+					 */
+				}
+			}
+		} catch (XMPPException e) {
+			e.printStackTrace();
+		}
+		return entries;
+	}
+
 	/**
 	 * @param args
 	 */
@@ -113,22 +168,23 @@ public class TestViewDocumentCreator extends JFrame implements ActionsInterface 
 
 	@Override
 	public void addLine(int lineNumb) {
-		
+
 	}
 
 	@Override
 	public void deleteLine(int lineNumb) {
-		
+
 	}
 
 	@Override
 	public void deleteSign(int lineNumb, int signNumb, char deletedSign) {
-		
+
 	}
 
 	@Override
 	public void addSign(int lineNumb, int signNumb, String addedSign) {
-		text.setText(text.getText() + addedSign);
+		text.setText(text.getText().substring(0, signNumb) + addedSign
+				+ text.getText().substring(signNumb));
 	}
 
 }

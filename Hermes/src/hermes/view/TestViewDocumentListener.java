@@ -32,7 +32,7 @@ public class TestViewDocumentListener extends JFrame implements
 	public TestViewDocumentListener() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		initComponents();
-		setSize(200, 200);
+		setSize(800, 400);
 		initConnection();
 		if (conn == null)
 			System.exit(0);
@@ -57,7 +57,7 @@ public class TestViewDocumentListener extends JFrame implements
 	}
 
 	private void initMultiuserChat() {
-		muc = new MultiUserChat(conn, "blubbernewroom@conference.jabber.org");
+		muc = new MultiUserChat(conn, "bbblablubbernewroom@conference.jabber.org");
 		try {
 			muc.join(username);
 
@@ -83,11 +83,11 @@ public class TestViewDocumentListener extends JFrame implements
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					System.out.println("enter pressed");
-				} else {
-					outProtocol.addSign(0, 0, String.valueOf(e.getKeyChar()));
-				}
+				int selStart = text.getSelectionStart();
+				String typed = String.valueOf(e.getKeyChar());
+				if (typed.equals("\n"))
+					selStart--;
+				outProtocol.addSign(0, selStart, typed);
 			}
 
 			@Override
@@ -125,7 +125,9 @@ public class TestViewDocumentListener extends JFrame implements
 
 	@Override
 	public void addSign(int lineNumb, int signNumb, String addedSign) {
-		text.setText(text.getText() + addedSign);
+		System.out.println(text.getText());
+		text.setText("<html>" + text.getText().substring(0, signNumb) + addedSign
+				+ text.getText().substring(signNumb) + "</html>");
 	}
 
 }
