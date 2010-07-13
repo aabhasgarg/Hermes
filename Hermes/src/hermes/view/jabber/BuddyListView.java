@@ -1,5 +1,6 @@
 package hermes.view.jabber;
 
+import hermes.Controller;
 import hermes.view.View;
 import hermes.xmpp.ChatConnection;
 
@@ -79,7 +80,7 @@ public class BuddyListView extends JPanel {
 			&& e.getClickCount() == 2) {
 
 		    int row = buddyTable.rowAtPoint(e.getPoint());
-		    BuddyListView.this.parent.startChatWith(row);
+		    Controller.CURRENT_INSTANCE.startChatWith(row);
 
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
 		    int row = buddyTable.rowAtPoint(e.getPoint());
@@ -150,8 +151,7 @@ public class BuddyListView extends JPanel {
     }
 
     /**
-     * Updates the Buddylist. (Don't know if array or list is better here, we
-     * will see)
+     * Updates the Buddylist
      * 
      * @param bl
      *            the new Buddylist

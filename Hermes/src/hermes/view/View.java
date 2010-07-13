@@ -5,10 +5,16 @@ import hermes.view.jabber.JabberView;
 import hermes.xmpp.ChatConnection;
 
 import java.awt.BorderLayout;
-import java.util.List;
 
 import javax.swing.*;
 
+/**
+ * A View object includes the hole GUI of Hermes. Every change on the GUI
+ * comming from the controller should pass this object
+ * 
+ * @author Dominic Rausch, Markus Braun
+ * 
+ */
 public class View extends JFrame {
 
     public Controller controller;

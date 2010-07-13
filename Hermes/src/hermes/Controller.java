@@ -54,6 +54,14 @@ public class Controller {
 	});
     }
 
+    /**
+     * starts a new chat. Creates a chat object, tells the view to add a new
+     * chat to the ChatView and initialises a listener to update the view
+     * 
+     * @param index
+     *            the index of the person to start a chat with in the buddyLisr
+     *            array
+     */
     public void startChatWith(int index) {
 	// init chat here and
     }

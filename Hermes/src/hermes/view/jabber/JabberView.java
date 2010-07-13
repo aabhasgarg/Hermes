@@ -16,6 +16,13 @@ import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
 
+/**
+ * This class includes a BuddyListView, that displays all buddies of the current
+ * XMPP connection and a ChatView, that displays alls currently opend chats
+ * 
+ * @author Dome
+ * 
+ */
 public class JabberView extends JPanel {
 
     private final View parent;
@@ -113,11 +120,7 @@ public class JabberView extends JPanel {
 
     }
 
-    public void startChatWith(int index) {
-	Controller.CURRENT_INSTANCE.startChatWith(index);
-    }
-
-    public void showContextMenu(MouseEvent e, int person) {
+    protected void showContextMenu(MouseEvent e, int person) {
 
     }
 }
