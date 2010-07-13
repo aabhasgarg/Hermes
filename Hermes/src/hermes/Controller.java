@@ -6,7 +6,6 @@ import java.util.List;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPException;
 
-import hermes.datastructures.Buddy;
 import hermes.view.View;
 import hermes.xmpp.ChatConnection;
 
@@ -14,7 +13,7 @@ public class Controller {
 
     private final View view;
 
-    private ChatConnection conn;
+    public ChatConnection conn;
     private String username = "YoFrankie";
     private String password = "testit";
 
@@ -22,18 +21,8 @@ public class Controller {
 	this.view = view;
 
 	this.initConnection();
-	view.setBuddyList(createBuddyList());
+	view.setConnection(conn);
 
-    }
-
-    private List<Buddy> createBuddyList() {
-	System.out.println("Generating Buddylist");
-	List<Buddy> bl = new ArrayList<Buddy>();
-	for (RosterEntry ent : conn.getRoster().getEntries()) {
-	    bl.add(new Buddy(ent.getName(), ent.getUser(), ent.getStatus()));
-	    System.out.println(ent.getUser() + " " + ent.getName());
-	}
-	return bl;
     }
 
     private void initConnection() {

@@ -10,8 +10,9 @@ public class MenuBar extends JMenuBar {
     public MenuBar() {
 	super();
 	File = new JMenu("File");
-	
+	File.add(new JMenuItem("New"));
 	this.add(File);
+	
     }
     
 }
