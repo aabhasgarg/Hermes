@@ -18,10 +18,12 @@ import javax.swing.*;
 public class View extends JFrame {
 
     public Controller controller;
+    public static View CURRENT_INSTANCE;
 
     private final JabberView jabberView;
 
     public View() {
+	CURRENT_INSTANCE = this;
 	this.setJMenuBar(new MenuBar());
 	this.setLayout(new BorderLayout());
 	this.jabberView = new JabberView(this);

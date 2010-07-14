@@ -1,6 +1,7 @@
 package hermes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.jivesoftware.smack.Chat;
@@ -62,8 +63,12 @@ public class Controller {
      *            the index of the person to start a chat with in the buddyLisr
      *            array
      */
+
     public void startChatWith(int index) {
-	// init chat here and
+	String username = buddyList[index].getUser();
+
+	conn.getChatManager().createChat(username, null);
+
     }
 
 }
