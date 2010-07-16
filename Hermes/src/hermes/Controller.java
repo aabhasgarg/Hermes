@@ -1,13 +1,8 @@
 package hermes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Presence;
 
 import hermes.view.View;
 import hermes.xmpp.ChatConnection;
@@ -16,6 +11,7 @@ public class Controller {
 
     public static Controller CURRENT_INSTANCE;
     private final View view;
+    private final ChatAdministration chatAdmin;
 
     public ChatConnection conn;
     public RosterEntry[] buddyList;
@@ -26,8 +22,10 @@ public class Controller {
     public Controller(View view) {
 	CURRENT_INSTANCE = this;
 	this.view = view;
-
+	this.chatAdmin = new ChatAdministration();
 	this.initConnection();
+	this.chatAdmin.setThisAsChatListener(conn.getChatManager());
+
 	view.setConnection(conn);
 
     }
@@ -36,23 +34,13 @@ public class Controller {
 
 	try {
 	    conn = new ChatConnection(username, password);
+	    Presence presence = new Presence(Presence.Type.available);
+	    conn.sendPacket(presence);
 	    System.out.println("conn succesful");
 	} catch (XMPPException e) {
 	    System.out.println("conn failed");
 	    e.printStackTrace();
 	}
-    }
-
-    private void initChatListener() {
-	this.conn.getChatManager().addChatListener(new ChatManagerListener() {
-
-	    @Override
-	    public void chatCreated(Chat chat, boolean createdLocally) {
-		// TODO Auto-generated method stub
-
-	    }
-
-	});
     }
 
     /**
@@ -65,10 +53,7 @@ public class Controller {
      */
 
     public void startChatWith(int index) {
-	String username = buddyList[index].getUser();
-
-	conn.getChatManager().createChat(username, null);
-
+	chatAdmin.initChat(buddyList[index].getUser());
     }
 
 }

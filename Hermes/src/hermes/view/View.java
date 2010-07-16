@@ -1,12 +1,15 @@
 package hermes.view;
 
 import hermes.Controller;
+import hermes.view.jabber.ChatTab;
 import hermes.view.jabber.JabberView;
 import hermes.xmpp.ChatConnection;
 
 import java.awt.BorderLayout;
 
 import javax.swing.*;
+
+import org.jivesoftware.smack.Chat;
 
 /**
  * A View object includes the hole GUI of Hermes. Every change on the GUI
@@ -38,7 +41,12 @@ public class View extends JFrame {
 	this.jabberView.setConnection(conn);
     }
 
-    public void addChatWindow() {
+    public void addChatTab(ChatTab ct) {
+	jabberView.addChatTab(ct);
+	this.repaint();
+    }
 
+    public void putChatTabInForeground(ChatTab ct) {
+	jabberView.chatView.setSelectedComponent(ct);
     }
 }

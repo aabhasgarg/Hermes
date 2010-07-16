@@ -27,7 +27,7 @@ public class JabberView extends JPanel {
 
     private final View parent;
     private final BuddyListView listView;
-    private final ChatView chatView;
+    public final ChatView chatView;
 
     private ChatConnection conn;
     private RosterEntry[] buddyList;
@@ -122,5 +122,9 @@ public class JabberView extends JPanel {
 
     protected void showContextMenu(MouseEvent e, int person) {
 
+    }
+
+    public void addChatTab(ChatTab tab) {
+	this.chatView.addTab(tab.getName(), tab);
     }
 }

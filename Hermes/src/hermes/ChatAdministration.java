@@ -1,21 +1,20 @@
 package hermes;
 
 import hermes.view.View;
+import hermes.view.jabber.ChatTab;
 
 import java.util.HashMap;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.ChatManagerListener;
-import org.jivesoftware.smack.MessageListener;
-import org.jivesoftware.smack.packet.Message;
 
 public class ChatAdministration {
 
-    private HashMap currentChats;
+    private HashMap<String, ChatTab> currentChats;
 
     public ChatAdministration() {
-	this.currentChats = new HashMap();
+	this.currentChats = new HashMap<String, ChatTab>();
     }
 
     public void setThisAsChatListener(ChatManager manager) {
@@ -28,11 +27,24 @@ public class ChatAdministration {
 	});
     }
 
+    /**
+     * 
+     * @param chat
+     * @param createtdLocally
+     */
     public void chatCreated(Chat chat, boolean createtdLocally) {
 	if (currentChats.containsKey(chat.getParticipant())) {
-	    // put fitting chat in foreground
+	    View.CURRENT_INSTANCE.putChatTabInForeground(currentChats.get(chat
+		    .getParticipant()));
 	} else {
-	    View.CURRENT_INSTANCE.addChatWindow();
+	    ChatTab ct = new ChatTab(chat);
+	    currentChats.put(chat.getParticipant(), ct);
+	    View.CURRENT_INSTANCE.addChatTab(ct);
 	}
+    }
+
+    public void initChat(String with) {
+	Controller.CURRENT_INSTANCE.conn.getChatManager()
+		.createChat(with, null);
     }
 }

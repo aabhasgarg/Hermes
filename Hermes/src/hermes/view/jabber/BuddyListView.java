@@ -80,6 +80,7 @@ public class BuddyListView extends JPanel {
 			&& e.getClickCount() == 2) {
 
 		    int row = buddyTable.rowAtPoint(e.getPoint());
+		    System.out.println("Doubleclick recognized");
 		    Controller.CURRENT_INSTANCE.startChatWith(row);
 
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
@@ -159,7 +160,6 @@ public class BuddyListView extends JPanel {
     public void setBuddyList(RosterEntry[] buddies) {
 
 	this.onlineBuddies = buddies;
-
 	this.repaint();
     }
 
