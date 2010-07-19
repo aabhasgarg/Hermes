@@ -24,6 +24,7 @@ public class View extends JFrame {
     public static View CURRENT_INSTANCE;
 
     private final JabberView jabberView;
+    private final SessionsTabView sessionsTabView;
 
     public View() {
 	CURRENT_INSTANCE = this;
@@ -31,6 +32,8 @@ public class View extends JFrame {
 	this.setLayout(new BorderLayout());
 	this.jabberView = new JabberView(this);
 	this.add(jabberView, BorderLayout.WEST);
+	this.sessionsTabView = new SessionsTabView();
+	this.add(sessionsTabView, BorderLayout.CENTER);
 
 	this.pack();
 	this.setMinimumSize(this.getSize());
@@ -48,5 +51,13 @@ public class View extends JFrame {
 
     public void putChatTabInForeground(ChatTab ct) {
 	jabberView.chatView.setSelectedComponent(ct);
+    }
+
+    public void addDocument(DocumentSessionView dsv) {
+	this.sessionsTabView.addTab(dsv.getLocalName(), dsv);
+    }
+
+    public void putDocumentInForeground(DocumentSessionView dsv) {
+	this.sessionsTabView.setSelectedComponent(dsv);
     }
 }

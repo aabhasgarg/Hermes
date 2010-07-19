@@ -1,5 +1,6 @@
 package hermes.view.jabber;
 
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 
@@ -39,6 +40,7 @@ public class JabberView extends JPanel {
 	this.add(listView);
 	this.chatView = new ChatView(this);
 	this.add(chatView);
+	this.setPreferredSize(new Dimension(100, 750));
 
     }
 

@@ -12,6 +12,7 @@ public class Controller {
     public static Controller CURRENT_INSTANCE;
     private final View view;
     private final ChatAdministration chatAdmin;
+    private final DocumentAdministration docAdmin;
 
     public ChatConnection conn;
     public RosterEntry[] buddyList;
@@ -22,7 +23,8 @@ public class Controller {
     public Controller(View view) {
 	CURRENT_INSTANCE = this;
 	this.view = view;
-	this.chatAdmin = new ChatAdministration();
+	this.chatAdmin = new ChatAdministration(this);
+	this.docAdmin = new DocumentAdministration(this);
 	this.initConnection();
 	this.chatAdmin.setThisAsChatListener(conn.getChatManager());
 
@@ -43,6 +45,10 @@ public class Controller {
 	}
     }
 
+    public String getThisUser() {
+	return this.username;
+    }
+
     /**
      * starts a new chat. Creates a chat object, tells the view to add a new
      * chat to the ChatView and initialises a listener to update the view
@@ -57,7 +63,10 @@ public class Controller {
     }
 
     public void startDocSessionWith(int user) {
-
+	docAdmin.initDocEditing(buddyList[user].getUser());
     }
 
+    public void editExistingFileWith(int user) {
+	docAdmin.editExistingFileWith(buddyList[user].getUser());
+    }
 }

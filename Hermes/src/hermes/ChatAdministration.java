@@ -1,5 +1,6 @@
 package hermes;
 
+import hermes.view.DocumentSessionView;
 import hermes.view.View;
 import hermes.view.jabber.ChatTab;
 
@@ -12,8 +13,10 @@ import org.jivesoftware.smack.ChatManagerListener;
 public class ChatAdministration {
 
     private HashMap<String, ChatTab> currentChats;
+    private final Controller controller;
 
-    public ChatAdministration() {
+    public ChatAdministration(Controller c) {
+	this.controller = c;
 	this.currentChats = new HashMap<String, ChatTab>();
     }
 
@@ -47,4 +50,5 @@ public class ChatAdministration {
 	Controller.CURRENT_INSTANCE.conn.getChatManager()
 		.createChat(with, null);
     }
+
 }
