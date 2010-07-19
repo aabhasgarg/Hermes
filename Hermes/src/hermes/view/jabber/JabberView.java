@@ -120,10 +120,6 @@ public class JabberView extends JPanel {
 
     }
 
-    protected void showContextMenu(MouseEvent e, int person) {
-
-    }
-
     public void addChatTab(ChatTab tab) {
 	this.chatView.addTab(tab.getName(), tab);
     }

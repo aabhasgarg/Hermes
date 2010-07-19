@@ -56,4 +56,8 @@ public class Controller {
 	chatAdmin.initChat(buddyList[index].getUser());
     }
 
+    public void startDocSessionWith(int user) {
+
+    }
+
 }

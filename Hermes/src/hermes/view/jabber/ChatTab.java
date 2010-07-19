@@ -4,17 +4,13 @@ import java.awt.Dimension;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.AbstractListModel;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
@@ -45,9 +41,19 @@ public class ChatTab extends JPanel implements MessageListener {
 	sp.setMinimumSize(new Dimension(100, 250));
 	this.add(sp);
 
+	// init textfield
 	messageField = new JTextField();
 	this.add(messageField);
 	this.messageField.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+	this.messageField.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		sendMessage(null);
+	    }
+	});
+
+	// init button
 	sendButton = new JButton("Send");
 	sendButton.addActionListener(new ActionListener() {
 

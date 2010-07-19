@@ -85,7 +85,7 @@ public class BuddyListView extends JPanel {
 
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
 		    int row = buddyTable.rowAtPoint(e.getPoint());
-		    BuddyListView.this.parent.showContextMenu(e, row);
+		    BuddyListView.this.showContextMenu(e, row);
 		}
 	    }
 
@@ -163,4 +163,7 @@ public class BuddyListView extends JPanel {
 	this.repaint();
     }
 
+    private void showContextMenu(MouseEvent e, int row) {
+	ContextMenu.show(this, e, row);
+    }
 }
