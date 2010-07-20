@@ -10,9 +10,11 @@ import hermes.datastructures.DocSession;
 import javax.swing.AbstractListModel;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.ListModel;
 
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -42,26 +44,13 @@ public class DocumentSessionView extends JPanel {
 	this.add(Box.createRigidArea(new Dimension(1, 5)));
 
 	// add multi user chat view
-	this.mucView = new JList();
-	this.mucView.setModel(new AbstractListModel() {
 
-	    @Override
-	    public Object getElementAt(int index) {
-		Message m = (Message) session.getMucPacket(index);
-		return m.getFrom() + ": " + m.getBody();
-	    }
-
-	    @Override
-	    public int getSize() {
-		return session.getMucCount();
-	    }
-
-	});
-	// mucView.setEnabled(false);
-	// mucView.setCellRenderer(new MucListCellRenderer(session));
+	this.mucView = new JList(session.getChatModel());
+	mucView.setCellRenderer(new MucListCellRenderer(session));
 
 	JScrollPane sp = new JScrollPane(mucView);
 	sp.setPreferredSize(new Dimension(700, 200));
+
 	this.add(sp);
 
 	// add Textfield for typing own messages
@@ -106,6 +95,6 @@ public class DocumentSessionView extends JPanel {
     }
 
     public void updateMuc() {
-	this.mucView.repaint();
+
     }
 }

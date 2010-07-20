@@ -14,8 +14,10 @@ public class DocumentAdministration {
 
     private final Controller controller;
     private HashMap<String, DocSession> currentMucs;
+    public static DocumentAdministration CURRENT_INSTANCE;
 
     public DocumentAdministration(Controller controller) {
+	CURRENT_INSTANCE = this;
 	this.controller = controller;
 	this.currentMucs = new HashMap<String, DocSession>();
     }
@@ -26,6 +28,7 @@ public class DocumentAdministration {
 	session.localName = "New File";
 	session.sessionView = new DocumentSessionView(session);
 	View.CURRENT_INSTANCE.addDocument(session.sessionView);
+	this.currentMucs.put(session.muc.getRoom(), session);
 
     }
 
@@ -59,5 +62,9 @@ public class DocumentAdministration {
 	s.masterMember = controller.getThisUser();
 	s.members.add(s.masterMember);
 	return s;
+    }
+
+    public HashMap<String, DocSession> getOpenSessions() {
+	return this.currentMucs;
     }
 }

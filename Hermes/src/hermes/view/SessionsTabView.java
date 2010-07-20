@@ -1,7 +1,5 @@
 package hermes.view;
 
-import hermes.view.jabber.ChatView;
-
 import java.awt.Dimension;
 
 import javax.swing.JTabbedPane;

@@ -1,6 +1,8 @@
 package hermes.view.jabber;
 
 import hermes.Controller;
+import hermes.DocumentAdministration;
+import hermes.datastructures.DocSession;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -42,7 +44,6 @@ public class ContextMenu extends JPopupMenu {
 	    }
 
 	});
-
 	inviteTo = new JMenu("Invite User to Session");
 	this.add(inviteTo);
 
@@ -50,6 +51,16 @@ public class ContextMenu extends JPopupMenu {
 
     private void updateSessions() {
 	inviteTo.removeAll();
+
+	for (DocSession s : DocumentAdministration.CURRENT_INSTANCE
+		.getOpenSessions().values()) {
+	    if (!s
+		    .isUserInSession(Controller.CURRENT_INSTANCE.buddyList[userClicked]
+			    .getUser())) {
+		JMenuItem user = new JMenuItem(s.localName);
+		inviteTo.add(user);
+	    }
+	}
 
     }
 

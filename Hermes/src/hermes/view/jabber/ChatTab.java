@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
@@ -32,7 +34,7 @@ public class ChatTab extends JPanel implements MessageListener {
 	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 	data = new DefaultListModel();
-
+	
 	this.messageListView = new JList(data);
 	this.messageListView.setMinimumSize(new Dimension(100, 250));
 

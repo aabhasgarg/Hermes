@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.text.StyledDocument;
 
 import org.jivesoftware.smack.PacketListener;
@@ -25,7 +26,7 @@ public class DocSession {
     public String masterMember;
 
     public StyledDocument document;
-    public List<Message> chatLog;
+    public MucChatModel chatLog;
 
     public DocSession(MultiUserChat muc) {
 	this.muc = muc;
@@ -37,7 +38,7 @@ public class DocSession {
 	    }
 	});
 	members = new LinkedList<String>();
-	chatLog = new ArrayList<Message>();
+	chatLog = new MucChatModel();
     }
 
     public void sendMessage(String message) {
@@ -58,7 +59,7 @@ public class DocSession {
     }
 
     public void mucMessageComingIn(Packet p) {
-	chatLog.add((Message) p);
+	chatLog.addElement((Message) p);
 	sessionView.updateMuc();
     }
 
@@ -66,7 +67,15 @@ public class DocSession {
 	return this.chatLog.size();
     }
 
-    public Message getMucPacket(int index) {
-	return this.chatLog.get(index);
+    public DefaultListModel getChatModel() {
+	return this.chatLog;
+    }
+
+    public Message getMucMessage(int index) {
+	return this.chatLog.getPacket(index);
+    }
+
+    public boolean isUserInSession(String user) {
+	return this.members.contains(user);
     }
 }

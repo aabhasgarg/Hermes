@@ -14,8 +14,10 @@ public class ChatAdministration {
 
     private HashMap<String, ChatTab> currentChats;
     private final Controller controller;
+    private static ChatAdministration CURRENT_INSTANCE;
 
     public ChatAdministration(Controller c) {
+	CURRENT_INSTANCE = this;
 	this.controller = c;
 	this.currentChats = new HashMap<String, ChatTab>();
     }
@@ -50,5 +52,6 @@ public class ChatAdministration {
 	Controller.CURRENT_INSTANCE.conn.getChatManager()
 		.createChat(with, null);
     }
+   
 
 }

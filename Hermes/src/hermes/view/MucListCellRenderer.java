@@ -24,8 +24,8 @@ public class MucListCellRenderer implements ListCellRenderer {
 	    int index, boolean isSelected, boolean cellHasFocus) {
 	JLabel l = (JLabel) defRenderer.getListCellRendererComponent(list,
 		value, index, false, false);
-	if (session.getMucPacket(index).getFrom().equals(
-		Controller.CURRENT_INSTANCE.getThisUser())) {
+	String from = session.getMucMessage(index).getFrom().split("/")[1];
+	if (from.equals(Controller.CURRENT_INSTANCE.getThisUser())) {
 	    l.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 	} else {
 	    l.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
