@@ -60,4 +60,8 @@ public class View extends JFrame {
     public void putDocumentInForeground(DocumentSessionView dsv) {
 	this.sessionsTabView.setSelectedComponent(dsv);
     }
+
+    public int getSelectedBuddy() {
+	return this.jabberView.getSelectedBuddy();
+    }
 }

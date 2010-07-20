@@ -22,7 +22,7 @@ public class DocumentAdministration {
 
     public void initDocEditing(String with) {
 
-	DocSession session = createMuc();
+	DocSession session = createSession();
 	session.localName = "New File";
 	session.sessionView = new DocumentSessionView(session);
 	View.CURRENT_INSTANCE.addDocument(session.sessionView);
@@ -37,7 +37,7 @@ public class DocumentAdministration {
 
     }
 
-    public DocSession createMuc() {
+    public DocSession createSession() {
 	MultiUserChat muc;
 	do {
 

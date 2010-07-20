@@ -12,7 +12,6 @@ public class ChatView extends JTabbedPane {
 	super();
 	this.parent = jv;
 	this.setTabPlacement(JTabbedPane.TOP);
-	this.setSize(new Dimension(100, 250));
     }
 
     public void addChat(ChatView chatView, String username) {
@@ -23,5 +22,6 @@ public class ChatView extends JTabbedPane {
     public void removeChat(String username) {
 	this.removeTabAt(this.indexOfTab(username));
     }
-    
+
+   
 }

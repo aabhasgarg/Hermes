@@ -1,7 +1,6 @@
 package hermes.view.jabber;
 
 import hermes.Controller;
-import hermes.view.View;
 import hermes.xmpp.ChatConnection;
 
 import java.awt.event.ActionEvent;
@@ -15,13 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
 import org.jivesoftware.smack.RosterEntry;
-import org.jivesoftware.smack.XMPPException;
 
 /**
  * Tableview that displays a simple Buddylist
@@ -165,5 +162,9 @@ public class BuddyListView extends JPanel {
 
     private void showContextMenu(MouseEvent e, int row) {
 	ContextMenu.show(this, e, row);
+    }
+
+    protected int getSelectedBuddy() {
+	return this.buddyTable.getSelectedRow();
     }
 }
