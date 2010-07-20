@@ -1,15 +1,18 @@
 package hermes.view;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import hermes.datastructures.DocSession;
 
 import javax.swing.AbstractListModel;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -35,9 +38,11 @@ public class DocumentSessionView extends JPanel {
 	textView = new JTextPane();
 	this.add(textView);
 
+	// add border
+	this.add(Box.createRigidArea(new Dimension(1, 5)));
+
 	// add multi user chat view
 	this.mucView = new JList();
-	this.add(mucView);
 	this.mucView.setModel(new AbstractListModel() {
 
 	    @Override
@@ -52,12 +57,18 @@ public class DocumentSessionView extends JPanel {
 	    }
 
 	});
-	mucView.setEnabled(false);
-	mucView.setCellRenderer(new MucListCellRenderer(session));
+	// mucView.setEnabled(false);
+	// mucView.setCellRenderer(new MucListCellRenderer(session));
+
+	JScrollPane sp = new JScrollPane(mucView);
+	sp.setPreferredSize(new Dimension(700, 200));
+	this.add(sp);
 
 	// add Textfield for typing own messages
 	this.messageTextField = new JTextField();
 	this.add(messageTextField);
+	this.messageTextField
+		.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
 	this.messageTextField.addActionListener(new ActionListener() {
 
 	    @Override
@@ -95,6 +106,6 @@ public class DocumentSessionView extends JPanel {
     }
 
     public void updateMuc() {
-
+	this.mucView.repaint();
     }
 }

@@ -41,8 +41,9 @@ public class DocumentAdministration {
 	MultiUserChat muc;
 	do {
 
-	    String mucName = "hermes." + controller.conn.getUser()
-		    + (System.currentTimeMillis() / 1000);
+	    String mucName = "hermes."
+		    + controller.getThisUser()
+		    + (System.currentTimeMillis() / 1000 + "@conference.jabber.org");
 	    muc = new MultiUserChat(controller.conn, mucName);
 
 	    try {
