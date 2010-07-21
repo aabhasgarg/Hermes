@@ -1,7 +1,7 @@
 package hermes;
 
-import hermes.view.DocumentSessionView;
 import hermes.view.View;
+import hermes.view.document.DocumentSessionView;
 import hermes.view.jabber.ChatTab;
 
 import java.util.HashMap;

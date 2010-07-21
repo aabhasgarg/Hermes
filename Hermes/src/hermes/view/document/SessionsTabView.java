@@ -1,4 +1,5 @@
-package hermes.view;
+package hermes.view.document;
+
 
 import java.awt.Dimension;
 

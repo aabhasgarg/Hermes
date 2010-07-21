@@ -1,4 +1,4 @@
-package hermes.view;
+package hermes.view.document;
 
 import hermes.Controller;
 import hermes.datastructures.DocSession;

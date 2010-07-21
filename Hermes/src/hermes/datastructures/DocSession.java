@@ -13,8 +13,17 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
-import hermes.view.DocumentSessionView;
+import hermes.view.document.DocumentSessionView;
 
+/**
+ * This class represents a Session, saving all data related to one specific
+ * session, such as the document itself, the collaborators, the view displaying
+ * the document, the chatlog, the local and the online session name. Also
+ * listens for the muc chat.
+ * 
+ * @author Dome
+ * 
+ */
 public class DocSession {
 
     public final MultiUserChat muc;

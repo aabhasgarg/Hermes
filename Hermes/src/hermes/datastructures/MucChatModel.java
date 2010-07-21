@@ -4,6 +4,12 @@ import javax.swing.DefaultListModel;
 
 import org.jivesoftware.smack.packet.Message;
 
+/**
+ * List Model saving the chat in a edit Session
+ * 
+ * @author Dome
+ * 
+ */
 public class MucChatModel extends DefaultListModel {
     @Override
     public Object getElementAt(int index) {

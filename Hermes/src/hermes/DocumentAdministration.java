@@ -1,8 +1,8 @@
 package hermes;
 
 import hermes.datastructures.DocSession;
-import hermes.view.DocumentSessionView;
 import hermes.view.View;
+import hermes.view.document.DocumentSessionView;
 
 import java.util.HashMap;
 
@@ -33,11 +33,11 @@ public class DocumentAdministration {
     }
 
     public void editExistingFileWith(String user) {
-
+	// TODO implement this method
     }
 
     public void addUserToSession(DocSession session, String user) {
-
+	// TODO implement this method
     }
 
     public DocSession createSession() {

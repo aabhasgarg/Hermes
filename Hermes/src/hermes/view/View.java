@@ -1,8 +1,11 @@
 package hermes.view;
 
 import hermes.Controller;
+import hermes.view.document.DocumentSessionView;
+import hermes.view.document.SessionsTabView;
 import hermes.view.jabber.ChatTab;
 import hermes.view.jabber.JabberView;
+import hermes.view.menu.MenuBar;
 import hermes.xmpp.ChatConnection;
 
 import java.awt.BorderLayout;
