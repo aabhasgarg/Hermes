@@ -161,7 +161,9 @@ public class BuddyListView extends JPanel {
     }
 
     private void showContextMenu(MouseEvent e, int row) {
-	ContextMenu.show(this, e, row);
+	if (row != -1) {
+	    ContextMenu.show(this, e, row);
+	}
     }
 
     protected int getSelectedBuddy() {

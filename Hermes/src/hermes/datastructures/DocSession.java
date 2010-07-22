@@ -13,6 +13,8 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
+import hermes.Constants;
+import hermes.Controller;
 import hermes.view.document.DocumentSessionView;
 
 /**
@@ -50,9 +52,18 @@ public class DocSession {
 	chatLog = new MucChatModel();
     }
 
+    /**
+     * sends a message to the muc. If <code>message</code> is null, takes the
+     * content of the textfield in the view of this muc and sends it. Does never
+     * send empty messages.
+     * 
+     * @param message
+     *            the message to send, if null, takes the content of the
+     *            textfield in the view
+     */
     public void sendMessage(String message) {
 	if (message == null) {
-	    message = sessionView.getMessageText();
+	    message = sessionView.getMessageText(true);
 	    sessionView.setMessageText("");
 	}
 	message = message.trim();
@@ -67,9 +78,22 @@ public class DocSession {
 	}
     }
 
+    /**
+     * this method is called by the chatlistener if a message is incoming via
+     * this muc. If its a normal chat message, prints it, else if it's a
+     * controlle message, follows the instructions
+     * 
+     * @param p
+     */
     public void mucMessageComingIn(Packet p) {
-	chatLog.addElement((Message) p);
-	sessionView.updateMuc();
+	Message m = (Message) p;
+	String msg = m.getBody();
+	if (msg.startsWith(Constants.CONTROLL_PREFIX)) {
+	    // TODO incoming controll message
+	} else {
+	    chatLog.addElement((Message) p);
+
+	}
     }
 
     public int getMucCount() {
@@ -84,7 +108,30 @@ public class DocSession {
 	return this.chatLog.getPacket(index);
     }
 
+    /**
+     * returns if a user is member of this session. Can be user with and without
+     * the suffix @domain.org
+     * 
+     * @param user
+     *            the username to check
+     * @return if the user is member of this session
+     */
     public boolean isUserInSession(String user) {
-	return this.members.contains(user);
+	return this.members.contains(user)
+		|| members.contains(user + "@jabber.org")
+		|| members.contains(user.split("@")[0]);
+    }
+
+    /**
+     * invite a new user to this session
+     * 
+     * @param userNumber
+     */
+    public void inviteUser(int userNumber) {
+	String userName = Controller.CURRENT_INSTANCE
+		.getUserForNumber(userNumber);
+	// TODO invite user
+
+	// TODO: listen for new users and initialise them :D
     }
 }

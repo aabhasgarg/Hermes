@@ -69,4 +69,8 @@ public class Controller {
     public void editExistingFileWith(int user) {
 	docAdmin.editExistingFileWith(buddyList[user].getUser());
     }
+
+    public String getUserForNumber(int number) {
+	return this.buddyList[number].getUser();
+    }
 }

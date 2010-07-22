@@ -8,6 +8,8 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashMap;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -22,8 +24,10 @@ public class ContextMenu extends JPopupMenu {
     private static int userClicked;
 
     private JMenuItem inviteTo;
+    private HashMap<Object, DocSession> sessions;
 
     private ContextMenu() {
+	this.sessions = new HashMap<Object, DocSession>();
 	JMenuItem startSession = new JMenuItem("Start new session");
 	this.add(startSession);
 	startSession.addActionListener(new ActionListener() {
@@ -51,14 +55,26 @@ public class ContextMenu extends JPopupMenu {
 
     private void updateSessions() {
 	inviteTo.removeAll();
-
+	sessions.clear();
 	for (DocSession s : DocumentAdministration.CURRENT_INSTANCE
 		.getOpenSessions().values()) {
 	    if (!s
 		    .isUserInSession(Controller.CURRENT_INSTANCE.buddyList[userClicked]
 			    .getUser())) {
+
 		JMenuItem user = new JMenuItem(s.localName);
 		inviteTo.add(user);
+		sessions.put(user, s);
+		user.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+			sessions.get(e.getSource()).inviteUser(userClicked);
+
+		    }
+
+		});
+
 	    }
 	}
 

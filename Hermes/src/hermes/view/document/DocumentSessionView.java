@@ -1,29 +1,29 @@
 package hermes.view.document;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import hermes.datastructures.DocSession;
 
-import javax.swing.AbstractListModel;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
+
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
 
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.ListCellRenderer;
 
 import javax.swing.JPanel;
 
-import org.jivesoftware.smack.packet.Message;
-
+/**
+ * This class displays one MU editing session.
+ * 
+ * @author Dome
+ * 
+ */
 public class DocumentSessionView extends JPanel {
 
     private final DocSession session;
@@ -74,7 +74,8 @@ public class DocumentSessionView extends JPanel {
 
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		DocumentSessionView.this.session.sendMessage(null);
+		DocumentSessionView.this.session
+			.sendMessage(getMessageText(true));
 	    }
 
 	});
@@ -85,16 +86,28 @@ public class DocumentSessionView extends JPanel {
 	return session.localName;
     }
 
-    public String getMessageText() {
-	return this.messageTextField.getText();
+    /**
+     * Returns the text tipped in by the user to send it via the muc
+     * 
+     * @return content of the chat text field
+     */
+    public String getMessageText(boolean deleteContent) {
+	String ret = this.messageTextField.getText();
+	if (deleteContent) {
+	    this.messageTextField.setText("");
+	}
+	return ret;
     }
 
+    /**
+     * 
+     * @param newText
+     */
     public void setMessageText(String newText) {
 	this.messageTextField.setText(newText);
 
     }
 
-    public void updateMuc() {
 
-    }
+    // TODO display a list of all users beeing in this session
 }
